@@ -1,0 +1,58 @@
+package com.starhealth;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+
+public class ArrayOperator {
+
+	public static void main(String[] args) {
+		Scanner inputReader = new Scanner(System.in);
+
+		System.out.println("Enter array size");
+		Integer count = Integer.parseInt(inputReader.next());
+
+		String[][] array = new String[count][3];
+
+		System.out.println("Enter elements delimited with space");
+		for (int i = 0; i < count; i++) {
+			String[] splittedString = new String[3];
+			for (int j = 0; j < 3; j++) {
+				splittedString[j] = inputReader.next();
+			}
+			array[i] = splittedString;
+		}
+
+		System.out.println("Enter name to search");
+		int nameToSearch = Integer.parseInt(inputReader.next());
+		System.out.println("Enter value to search");
+		String valueToSearch = inputReader.next();
+
+		System.out.print("Number of elements=[" + count + "]\n");
+		System.out.print("Name to search=[" + nameToSearch + "] value to search=[" + valueToSearch + "]\n");
+		System.out.println("Elements " + Arrays.deepToString(array));
+
+		System.out.println("Result " + Arrays.deepToString(resolve(count, array, nameToSearch, valueToSearch)));
+	}
+
+	private static String[][] resolve(int number, String[][] array, int d, String v) {
+		String[][] result = { { "" } };
+
+		List<List<String>> data = new ArrayList<>();
+
+		for (int i = 0; i < number; i++) {
+			if (v.equals(array[i][d])) {
+				data.add(Arrays.asList(array[i]));
+			}
+		}
+
+		result = new String[data.size()][3];
+		for (int i = 0; i < data.size(); i++) {
+			result[i] = (String[]) data.get(i).toArray();
+		}
+		return result;
+
+	}
+
+}
